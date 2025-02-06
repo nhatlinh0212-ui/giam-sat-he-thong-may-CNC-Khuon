@@ -204,3 +204,66 @@ td {
 .image-container:hover img {
     transform: none;
 }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+        text-align: center; /* Center align text */
+        color: #00008B; /* Dark blue text color */
+    }
+
+    h1, h2, p, th, td, .info-title, .info-box {
+        color: #00008B; /* Dark blue text color */
+    }
+
+    .centered {
+        width: 90%;
+        padding: 10px;
+    }
+
+    table {
+        font-size: 10px; /* Further reduce font size for smaller screens */
+    }
+
+    .info-container {
+        flex-direction: column;
+        align-items: center; /* Center align items */
+    }
+
+    .info-box {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .loading-container {
+        flex-direction: column;
+        align-items: center; /* Center align items */
+    }
+
+    .progress-bar {
+        width: 100%;
+    }
+
+    .image-container {
+        width: 100%; /* Ensure image container takes full width */
+        max-width: 100%; /* Ensure image container does not exceed screen width */
+    }
+
+    .image-container img {
+        width: 100%; /* Ensure image takes full width */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .password-form {
+        width: 100%;
+        max-width: 400px; /* Limit max width for better appearance */
+        margin: 0 auto; /* Center align form */
+    }
+
+    .loading-indicator, .progress-bar, .info-container, .table-container {
+        width: 100%;
+        max-width: 400px; /* Limit max width for better appearance */
+        margin: 0 auto; /* Center align elements */
+    }
+}
