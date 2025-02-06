@@ -18,7 +18,7 @@
         <h1>GIÁM SÁT HỆ THỐNG MÁY CNC NHÀ MÁY KHUÔN</h1>
         <p>Layout nhà máy Khuôn</p>
         <div class="image-container" style="position: relative; display: inline-block; overflow: hidden; max-width: 100%; max-height: 80vh;">
-            <img src="khuon_1.jpg" alt="Layout Khuôn" loading="lazy" style="width: 100%; height: auto;">
+            <img src="khuon_1.jpg" alt="Layout Khuôn" loading="lazy" style="width: 100%; height: auto;" ondblclick="expandImage(this)">
             <div id="tooltip" class="tooltip"></div>
         </div>
         <div id="tooltip-above" class="tooltip-above"></div> <!-- Added tooltip above the image -->
@@ -89,6 +89,57 @@
                 tooltipAbove.style.display = 'none';
             });
         });
+
+        function expandImage(img) {
+            if (img.style.position === 'fixed') {
+                img.style.position = 'static';
+                img.style.width = '100%';
+                img.style.height = 'auto';
+                img.style.zIndex = '1';
+            } else {
+                img.style.position = 'fixed';
+                img.style.top = '0';
+                img.style.left = '0';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.zIndex = '1000';
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const img = document.querySelector('.image-container img');
+                if (img.style.position === 'fixed') {
+                    img.style.position = 'static';
+                    img.style.width = '100%';
+                    img.style.height = 'auto';
+                    img.style.zIndex = '1';
+                }
+            }
+        });
+
+        document.querySelector('.image-container img').addEventListener('mousedown', function(event) {
+            const img = this;
+            const startY = event.clientY;
+            function onMouseMove(event) {
+                if (event.clientY > startY + 50) { // Drag down by 50px to exit full screen
+                    img.style.position = 'static';
+                    img.style.width = '100%';
+                    img.style.height = 'auto';
+                    img.style.zIndex = '1';
+                    document.removeEventListener('mousemove', onMouseMove);
+                }
+            }
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', function() {
+                document.removeEventListener('mousemove', onMouseMove);
+            }, { once: true });
+        });
+
+        // Detect if the user is on a mobile device
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+            document.body.classList.add('mobile-layout');
+        }
     </script>
 </body>
 </html>
