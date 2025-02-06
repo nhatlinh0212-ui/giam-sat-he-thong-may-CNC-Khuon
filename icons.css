@@ -1,0 +1,18 @@
+.icon {
+    width: 20px; /* Changed size to 20px */
+    height: 20px; /* Changed size to 20px */
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.icon-switch-on {
+    background-image: url('on.png');
+}
+
+.icon-switch-off {
+    background-image: url('off.png');
+}
+
+.icon-alert {
+    background-image: url('alert.png');
+}
