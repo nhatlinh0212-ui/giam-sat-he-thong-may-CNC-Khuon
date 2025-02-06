@@ -3,6 +3,11 @@ body {
     background-color: #ffffff;
     text-align: center;
     padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 h1 {
@@ -22,14 +27,14 @@ button:hover {
 }
 
 .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: rgb(181, 178, 178);
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 #password-input {
@@ -89,15 +94,18 @@ td {
 .loading-container {
     height: 60px; /* Fixed height to include both loading indicator and progress bar */
     margin-bottom: 20px; /* Space between loading container and table */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .info-container {
     display: flex;
     align-items: center;
-    
-    /* justify-content: space-between; /* Distribute space evenly */
-    margin-bottom: 20px;
+    justify-content: center;
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    margin-bottom: 20px;
 }
 
 .info-title {
@@ -137,6 +145,10 @@ td {
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .password-form h2 {
@@ -194,10 +206,17 @@ td {
     position: relative;
     display: inline-block;
     overflow: hidden;
+    max-width: 100%;
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .image-container img {
     transition: transform 0.25s ease;
+    width: 100%;
+    height: auto;
 }
 
 /* Remove zoom functionality */
@@ -271,4 +290,70 @@ td {
         max-width: 400px; /* Limit max width for better appearance */
         margin: 0 auto; /* Center align elements */
     }
+}
+
+/* Mobile layout styles */
+body.mobile-layout {
+    padding: 20px;
+    text-align: center; /* Center align text */
+    color: #000; /* Black text color */
+}
+
+body.mobile-layout h1, body.mobile-layout h2, body.mobile-layout p, body.mobile-layout .info-title, body.mobile-layout .info-box {
+    color: #000; /* Black text color */
+}
+
+body.mobile-layout th, body.mobile-layout td {
+    color: #000; /* Black text color for table data */
+}
+
+body.mobile-layout .centered {
+    width: 90%;
+    padding: 10px;
+}
+
+body.mobile-layout table {
+    font-size: 10px; /* Further reduce font size for smaller screens */
+    margin: 0 auto; /* Center align table */
+}
+
+body.mobile-layout .info-container {
+    flex-direction: column;
+    align-items: center; /* Center align items */
+}
+
+body.mobile-layout .info-box {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+body.mobile-layout .loading-container {
+    flex-direction: column;
+    align-items: center; /* Center align items */
+}
+
+body.mobile-layout .progress-bar {
+    width: 100%;
+}
+
+body.mobile-layout .image-container {
+    width: 100%; /* Ensure image container takes full width */
+    max-width: 100%; /* Ensure image container does not exceed screen width */
+}
+
+body.mobile-layout .image-container img {
+    width: 100%; /* Ensure image takes full width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+body.mobile-layout .password-form {
+    width: 100%;
+    max-width: 400px; /* Limit max width for better appearance */
+    margin: 0 auto; /* Center align form */
+}
+
+body.mobile-layout .loading-indicator, body.mobile-layout .progress-bar, body.mobile-layout .info-container, body.mobile-layout .table-container {
+    width: 100%;
+    max-width: 400px; /* Limit max width for better appearance */
+    margin: 0 auto; /* Center align elements */
 }
