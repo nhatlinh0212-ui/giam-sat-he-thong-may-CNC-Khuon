@@ -57,5 +57,18 @@ document.querySelector('.image-container').addEventListener('mouseleave', functi
     document.getElementById('tooltip').style.display = 'none';
 });
 
+document.querySelector('.image-container').addEventListener('dblclick', function() {
+    const image = this.querySelector('img');
+    if (image.requestFullscreen) {
+        image.requestFullscreen();
+    } else if (image.mozRequestFullScreen) { // Firefox
+        image.mozRequestFullScreen();
+    } else if (image.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        image.webkitRequestFullscreen();
+    } else if (image.msRequestFullscreen) { // IE/Edge
+        image.msRequestFullscreen();
+    }
+});
+
 document.addEventListener('DOMContentLoaded', addIconsToImage);
 window.addEventListener('resize', addIconsToImage); // Recalculate icon positions on window resize
