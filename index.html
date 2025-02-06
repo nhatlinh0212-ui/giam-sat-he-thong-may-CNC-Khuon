@@ -89,6 +89,11 @@
                 tooltipAbove.style.display = 'none';
             });
         });
+
+        // Detect if the user is on a mobile device
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+            document.body.classList.add('mobile-layout');
+        }
     </script>
 </body>
 </html>
