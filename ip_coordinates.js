@@ -1,14 +1,14 @@
 const ipCoordinates = {
-    "10.14.6.24": [363, 87, [26, 30]],//
-    "10.14.6.23": [402, 87, [26, 30]],//
-    "10.14.6.26": [440, 87, [26, 30]],//
-    "10.14.6.37": [480, 87, [26, 30]],//
-    "10.14.6.18": [472, 18, [26, 30]],//
-    "10.14.6.19": [511, 18, [26, 30]],//
-    "10.14.6.22": [550, 18, [26, 30]],//
-    "10.14.6.42": [833, 156, [26, 30]],//
-    "10.14.6.44": [795, 156, [26, 30]],//
-    "10.14.6.43": [840, 218, [26, 30]]//
+    "10.14.6.24": [363, 87, [27, 31]],//
+    "10.14.6.23": [402, 87, [27, 31]],//
+    "10.14.6.26": [440, 87, [27, 31]],//
+    "10.14.6.37": [480, 87, [27, 31]],//
+    "10.14.6.18": [472, 17, [27, 31]],//
+    "10.14.6.19": [511, 17, [27, 31]],//
+    "10.14.6.22": [550, 17, [27, 31]],//
+    "10.14.6.42": [833, 156, [27, 31]],//
+    "10.14.6.44": [795, 156, [27, 31]],//
+    "10.14.6.43": [840, 218, [27, 31]]//
 };
 
 function addIconsToImage() {
@@ -33,41 +33,43 @@ function addIconsToImage() {
             icon.style = `position:absolute;left:${x * scaleX}px;top:${y * scaleY}px;width:${width * scaleX}px;height:${height * scaleY}px;`;
             icon.dataset.ip = ip; // Store the IP address in a data attribute
             icon.dataset.status = status; // Store the status in a data attribute
+            icon.addEventListener('mouseover', showNote);
+            icon.addEventListener('click', showNote);
             imageContainer.appendChild(icon);
         }
     });
 }
 
-document.querySelector('.image-container').addEventListener('mousemove', function(event) {
-    const tooltip = document.getElementById('tooltip');
-    const icon = event.target.closest('.icon');
-    if (icon) {
-        tooltip.innerHTML = `IP: ${icon.dataset.ip}<br>Status: ${icon.dataset.status}`;
-        const iconRect = icon.getBoundingClientRect();
-        tooltip.style.left = `${iconRect.left + (iconRect.width / 2) - (tooltip.offsetWidth / 2) + window.scrollX}px`;
-        tooltip.style.top = `${iconRect.bottom + window.scrollY + 2}px`; // Display closer below the icon
-        tooltip.style.display = 'block';
-        tooltip.style.color = 'white'; // Ensure text color is white
-    } else {
-        tooltip.style.display = 'none';
+function showNote(event) {
+    const existingNote = document.querySelector('.note');
+    if (existingNote) {
+        existingNote.remove();
     }
-});
+
+    const note = document.createElement('div');
+    note.className = 'note';
+    note.innerText = `IP: ${event.target.dataset.ip}\nStatus: ${event.target.dataset.status}`;
+    note.style.position = 'absolute';
+    note.style.left = `${event.target.getBoundingClientRect().left}px`;
+    note.style.top = `${event.target.getBoundingClientRect().bottom + 5}px`; // Place note 2px below the icon
+    note.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    note.style.color = 'white';
+    note.style.padding = '5px';
+    note.style.borderRadius = '5px';
+    note.style.zIndex = '1000';
+    document.body.appendChild(note);
+
+    setTimeout(() => {
+        note.remove();
+    }, 5000); // Remove note after 5 seconds
+
+    event.target.addEventListener('mouseleave', () => {
+        note.remove();
+    }, { once: true });
+}
 
 document.querySelector('.image-container').addEventListener('mouseleave', function() {
     document.getElementById('tooltip').style.display = 'none';
-});
-
-document.querySelector('.image-container').addEventListener('dblclick', function() {
-    const image = this.querySelector('img');
-    if (image.requestFullscreen) {
-        image.requestFullscreen();
-    } else if (image.mozRequestFullScreen) { // Firefox
-        image.mozRequestFullScreen();
-    } else if (image.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        image.webkitRequestFullscreen();
-    } else if (image.msRequestFullscreen) { // IE/Edge
-        image.msRequestFullscreen();
-    }
 });
 
 document.addEventListener('DOMContentLoaded', addIconsToImage);
